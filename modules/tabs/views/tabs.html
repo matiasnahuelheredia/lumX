@@ -6,8 +6,10 @@
            ng-repeat="tab in lxTabs.tabs"
            ng-click="lxTabs.setActiveTab(tab)"
            lx-ripple>
+           <lx-tooltip lx-tooltip="{{tab.tabTooltip}}" lx-tooltip-position="{{tab.tabTooltipPosition}}">
            <i class="mdi mdi-{{ tab.icon }}" ng-if="tab.icon"></i>
            <span ng-if="tab.label">{{ tab.label }}</span>
+          </lx-tooltip>
         </a>
     </div>
     

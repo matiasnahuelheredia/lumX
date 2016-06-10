@@ -86,7 +86,9 @@
                     index: index,
                     label: link.label,
                     icon: link.icon,
-                    disabled: link.disabled
+                    disabled: link.disabled,
+                    tabTooltip: link.tabTooltip,
+                    tabTooltipPosition: link.tabTooltipPosition
                 };
 
                 updateTabs(tab);
@@ -211,6 +213,8 @@
                     tab.index = _tab.index;
                     tab.icon = _tab.icon;
                     tab.label = _tab.label;
+                    tab.tabTooltip = _tab.tabTooltip;
+                    tab.tabTooltipPosition = _tab.tabTooltipPosition;
                 }
             });
 
@@ -256,6 +260,15 @@
                 ctrls[0].setLabel(_newLabel);
             });
 
+            attrs.$observe('lxTabTooltip', function(_newTabTooltip)
+            {
+                ctrls[0].setTabTooltip(_newTabTooltip);
+            });
+            attrs.$observe('lxTabTooltipPosition', function(_newTabTooltipPosition)
+            {
+                ctrls[0].setTabTooltipPosition(_newTabTooltipPosition);
+            });
+
             attrs.$observe('lxIcon', function(_newIcon)
             {
                 ctrls[0].setIcon(_newIcon);
@@ -273,6 +286,8 @@
             uuid: LxUtils.generateUUID(),
             index: undefined,
             label: undefined,
+            tabToolTip:undefined,
+            tabTooltipPosition:'top',
             icon: undefined,
             disabled: false
         };
@@ -280,6 +295,8 @@
         lxTab.init = init;
         lxTab.setIcon = setIcon;
         lxTab.setLabel = setLabel;
+        lxTab.setTabTooltip= setTabTooltip;
+        lxTab.setTabTooltipPosition= setTabTooltipPosition;
         lxTab.tabIsActive = tabIsActive;
 
         $scope.$watch(function()
@@ -324,6 +341,21 @@
         function setLabel(_label)
         {
             tab.label = _label;
+
+            parentCtrl.updateTabs(tab);
+        }
+
+
+        function setTabTooltip(_tabTooltip)
+        {
+            tab.tabTooltip = _tabTooltip;
+
+            parentCtrl.updateTabs(tab);
+        }
+
+        function setTabTooltipPosition(_tabTooltipPosition)
+        {
+            tab.tabTooltipPosition = _tabTooltipPosition;
 
             parentCtrl.updateTabs(tab);
         }
